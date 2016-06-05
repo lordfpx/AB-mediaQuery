@@ -13,9 +13,45 @@ The plugin is commonJS and AMD compliant.
 
 ## Usage
 
-You only need to call that function to create `AB.mediaQuery` object and bind the breakpoint 'watcher':
+Define your breakpoints in your SASS:
+```
+// Define min breakpoints values here
+$bp-tiny:   0; 
+$bp-small:  30; 
+$bp-medium: 64; 
+$bp-large:  80;
+$bp-huge:   90;
+$bp-unit:   "em"; 
+
+// Do not edit ->
+$tiny-only:   "screen and (max-width: #{$bp-small - 1}#{$bp-unit})";
+$tiny-up:     "screen and (min-width: #{$bp-tiny}#{$bp-unit})";
+$small-only:  "screen and (min-width: #{$bp-small}#{$bp-unit}) and (max-width: #{$bp-medium - 1}#{$bp-unit})";
+$small-up:    "screen and (min-width: #{$bp-small}#{$bp-unit})";
+$medium-only: "screen and (min-width: #{$bp-medium}#{$bp-unit}) and (max-width: #{$bp-large - 1}#{$bp-unit})";
+$medium-up:   "screen and (min-width: #{$bp-medium}#{$bp-unit})";
+$large-only:  "screen and (min-width: #{$bp-large}#{$bp-unit}) and (max-width: #{$bp-huge - 1}#{$bp-unit})";
+$large-up:    "screen and (min-width: #{$bp-large}#{$bp-unit})";
+$huge-up:     "screen and (min-width: #{$bp-huge}#{$bp-unit})";
+#AB-mediaQuery {
+  font-family: "%7B%22tiny%22:%22#{$bp-tiny}%22,%22small%22:%22#{$bp-small}%22,%22medium%22:%22#{$bp-medium}%22,%22large%22:%22#{$bp-large}%22,%22huge%22:%22#{$bp-huge}%22,%22unit%22:%22#{$bp-unit}%22%7D";
+}
+// <- Do not edit
+```
+
+You then only need to call that function to create `AB.mediaQuery` object and bind the breakpoint 'watcher':
 ```
 mediaQuery();
+
+// In case you don't want to use SASS definition, you can specify brekpoints on initialization
+mediaQuery({
+  tiny:     0,
+  small:    480,
+  medium:   1024,
+  large:    1280,
+  huge:     1440,
+  unit:     "px"
+});
 ```
 
 
