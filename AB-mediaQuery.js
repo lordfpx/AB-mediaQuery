@@ -36,111 +36,93 @@
     window.CustomEvent = CustomEvent;
   }
 
+
   var MediaQuery = function(opt) {
     if (!(this instanceof MediaQuery)) return new MediaQuery(opt);
 
     this.settings = extend({}, MediaQuery.defaults, opt);
-    this.queries  = [];
+    this.queries  = {};
     this.current  = '';
 
     this.init();
   };
 
   MediaQuery.defaults = {
-    tiny:     0,
-    small:    480,
-    medium:   1024,
-    large:    1280,
-    huge:     1440,
-    unit:     "px"
+    small:    '30em',
+    medium:   '64em',
+    large:    '80em',
+    huge:     '90em'
   };
 
   MediaQuery.prototype = {
     init: function() {
+      this._defineQueries();
+      this.current = this._getCurrentSize();
+      this._watcher();
+
+      return this;
+    },
+
+    _defineQueries: function() {
       // Create #AB-mediaQuery element to extract mediaQueries from generated font-family CSS rule
       var meta = document.createElement('meta');
       meta.id = 'AB-mediaQuery';
       document.getElementsByTagName('head')[0].appendChild(meta);
 
-      var namedQueries = this.getQueries();
+      var namedQueries = this._getQueries();
+
+      // 'tiny' has specific rules
+      this.queries['tinyOnly'] = 'screen and (max-width: '+ (parseFloat(namedQueries.small)-0.01) +'em)';
+      this.queries['tiny']     = 'screen';
+
+      // define other media queries
       for (var key in namedQueries) {
         if (!namedQueries.hasOwnProperty( key )) continue;
 
-        if (key !== 'unit') {
-          this.queries.push({
-            name: key,
-            value: 'screen and (min-width: ' + namedQueries[key] + namedQueries.unit + ')'
-          });
-        }
-      }
-
-      this.current = this._getCurrentSize();
-      this._watcher();
-      this._setVar();
-
-      return this;
-    },
-
-    _setVar: function() {
-      var namedQueries = this.getQueries();
-      this.is = {};
-
-      for (var key in namedQueries) {
-        if (!namedQueries.hasOwnProperty(key) && key === 'unit') continue;
         switch (key) {
-          case 'tiny':
-            this.is[key + '_only'] = 'screen and (max-width: '+ (namedQueries.small-1) + namedQueries.unit +')';
-            this.is[key + '_up']   = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +')';
-            break;
           case 'small':
-            this.is[key + '_only'] = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +') and (max-width: '+ (namedQueries.medium-1) + namedQueries.unit +')';
-            this.is[key + '_up']   = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries[key] +') and (max-width: '+ (parseFloat(namedQueries.medium)-0.01) +'em)';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
             break;
           case 'medium':
-            this.is[key + '_only'] = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +') and (max-width: '+ (namedQueries.large-1) + namedQueries.unit +')';
-            this.is[key + '_up']   = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries[key] +') and (max-width: '+ (parseFloat(namedQueries.large)-0.01) +'em)';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
             break;
           case 'large':
-            this.is[key + '_only'] = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +') and (max-width: '+ (namedQueries.huge-1) + namedQueries.unit +')';
-            this.is[key + '_up']   = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries[key] +') and (max-width: '+ (parseFloat(namedQueries.huge)-0.01) +'em)';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
             break;
           case 'huge':
-            this.is[key + '_up']   = 'screen and (min-width: '+ namedQueries[key] + namedQueries.unit +')';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
             break;
         }
       }
     },
 
     _getCurrentSize: function() {
-      var matched;
+      var matched,
+          that = this;
 
-      this.queries.forEach(function(el, i, array) {
-        if (window.matchMedia(el.value).matches) matched = el;
-      });
-
-      if (typeof matched === 'object') {
-        return matched.name;
-      } else {
-        return matched;
+      for (var key in that.queries) {
+        if (!that.queries.hasOwnProperty( key )) continue;
+        if (window.matchMedia(that.queries[key]).matches) matched = key;
       }
+
+      if (typeof matched === 'object') return matched.name;
+      return matched;
     },
 
-    getQueries: function() {
-      var metaMD = document.getElementById('AB-mediaQuery');
-      var fontMD = window.getComputedStyle(metaMD, null).getPropertyValue("font-family");
-      var extractedStyles = decodeURI(fontMD.trim().slice(1, -1));
+    _getQueries: function() {
+      var metaMD = document.getElementById('AB-mediaQuery'),
+          fontMD = window.getComputedStyle(metaMD, null).getPropertyValue("font-family"),
+          extractedStyles = decodeURI(fontMD.trim().slice(1, -1));
+
       return isJson(extractedStyles) ? JSON.parse(extractedStyles) : this.settings;
     },
 
     get: function(size) {
       if (typeof size === 'undefined') return;
-
-      var queries = this.queries;
-
-      for (var i = 0, len = queries.length; i < len; i++) {
-        var thisQuery = queries[i];
-        if (size === thisQuery.name) return thisQuery.value;
-      }
+      return this.queries[size];
     },
 
     _watcher: function() {
@@ -157,11 +139,11 @@
             that.current = newSize;
             window.dispatchEvent(event);
           }
-        }, 200);
+        }, 150);
       };
     },
 
-    atLeast: function(size) {
+    is: function(size) {
       var query = this.get(size);
       if (query) return window.matchMedia(query).matches;
     }

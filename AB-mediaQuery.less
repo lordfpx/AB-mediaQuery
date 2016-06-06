@@ -1,0 +1,25 @@
+// Define min breakpoints values here in EM (if needed: http://pxtoem.com/)
+// http://zellwk.com/blog/media-query-units/
+@bp-small-size:  30em;
+@bp-medium-size: 64em;
+@bp-large-size:  80em;
+@bp-huge-size:   90em;
+
+// DO NOT EDIT ->
+#AB-mediaQuery { font-family: "%7B%22small%22:%22@{bp-small-size}%22,%22medium%22:%22@{bp-medium-size}%22,%22large%22:%22@{bp-large-size}%22,%22huge%22:%22@{bp-huge-size}%22%7D"; }
+// <- DO NOT EDIT
+
+
+
+// optional ->
+// Here are how breakpoints will be watched on JS side, so it's good to have the same on CSS side indeed
+@bp-tinyOnly:   ~"screen and (max-width: @{bp-small-size - 0.01})";
+@bp-tiny:       ~"screen";
+@bp-smallOnly:  ~"screen and (min-width: @{bp-small-size}) and (max-width: @{bp-medium-size - 0.01})";
+@bp-small:      ~"screen and (min-width: @{bp-small-size})";
+@bp-mediumOnly: ~"screen and (min-width: @{bp-medium-size}) and (max-width: @{bp-large-size - 0.01})";
+@bp-medium:     ~"screen and (min-width: @{bp-medium-size})";
+@bp-largeOnly:  ~"screen and (min-width: @{bp-large-size}) and (max-width: @{bp-huge-size - 0.01})";
+@bp-large:      ~"screen and (min-width: @{bp-large-size})";
+@bp-huge:       ~"screen and (min-width: @{bp-huge-size})";
+// <- optional
