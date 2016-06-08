@@ -24,6 +24,10 @@
     return true;
   }
 
+  function startsWith(str, prefix) {
+    return str.lastIndexOf(prefix, 0) === 0;
+  }
+
   // For IE 9 and 10
   if (typeof window.CustomEvent !== "function") {
     function CustomEvent(event, params ){
@@ -42,16 +46,19 @@
 
     this.settings = extend({}, MediaQuery.defaults, opt);
     this.queries  = {};
-    this.current  = '';
+    this.current  = [];
 
     this.init();
   };
 
   MediaQuery.defaults = {
-    small:    '30em',
-    medium:   '64em',
-    large:    '80em',
-    huge:     '90em'
+    bp: {
+      small:    '30em',
+      medium:   '64em',
+      large:    '80em',
+      huge:     '90em'
+    },
+    delay:      200
   };
 
   MediaQuery.prototype = {
@@ -71,9 +78,8 @@
 
       var namedQueries = this._getQueries();
 
-      // 'tiny' has specific rules
+      // 'tiny' rule since it's specific
       this.queries['tinyOnly'] = 'screen and (max-width: '+ (parseFloat(namedQueries.small)-0.01) +'em)';
-      this.queries['tiny']     = 'screen';
 
       // define other media queries
       for (var key in namedQueries) {
@@ -96,20 +102,25 @@
             this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
             break;
         }
+
+        // add custom user rules if any:
+        if (startsWith(key, '*')) {
+          this.queries[key.replace('*','')] = namedQueries[key];
+        }
       }
     },
 
     _getCurrentSize: function() {
-      var matched,
-          that = this;
+      var that = this,
+          newMediaQueries = [];
 
       for (var key in that.queries) {
         if (!that.queries.hasOwnProperty( key )) continue;
-        if (window.matchMedia(that.queries[key]).matches) matched = key;
+        if (window.matchMedia(that.queries[key]).matches) newMediaQueries.push(key);
       }
 
-      if (typeof matched === 'object') return matched.name;
-      return matched;
+      //if (typeof matched === 'object') return matched.name;
+      return newMediaQueries;
     },
 
     _getQueries: function() {
@@ -117,7 +128,7 @@
           fontMD = window.getComputedStyle(metaMD, null).getPropertyValue("font-family"),
           extractedStyles = decodeURI(fontMD.trim().slice(1, -1));
 
-      return isJson(extractedStyles) ? JSON.parse(extractedStyles) : this.settings;
+      return isJson(extractedStyles) ? JSON.parse(extractedStyles) : this.settings.bp;
     },
 
     get: function(size) {
@@ -135,11 +146,11 @@
         resizeTimer = setTimeout(function() {
           newSize = that._getCurrentSize();
 
-          if (newSize !== that.current) {
+          if (newSize.join('|') !== that.current.join('|')) {
             that.current = newSize;
             window.dispatchEvent(event);
           }
-        }, 150);
+        }, that.settings.delay);
       };
     },
 
