@@ -67,7 +67,7 @@ $ab-mq-myRules: (
 
 Then include `_AB-mediaQuery.scss`:
 ```
-@include 'path/to/AB-mediaQuery'
+@import 'path/to/AB-mediaQuery'
 ```
 
 #### JS setup
