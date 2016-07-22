@@ -13,7 +13,7 @@ $ab-mq-myRules: false !default;
   $length: length($breakpoints);
   $i: 1;
 
-  $string: '"%7B';
+  $string: '%7B';
   @each $key, $size in ($breakpoints) {
     $string: $string +'%22'+ $key +'%22:%22'+ $size +'%22';
     @if ($length != $i) {
@@ -34,13 +34,13 @@ $ab-mq-myRules: false !default;
       $i: $i + 1;
     }
   }
-  $string: $string + '%7D"';
+  $string: $string + '%7D';
 
   @return $string;
 }
 
 // passing options from CSS to JS
-#AB-mediaQuery { font-family: #{ab-breakpointsJson($ab-breakpoints)}; }
+#AB-mediaQuery { font-family: ab-breakpointsJson($ab-breakpoints); }
 
 // Here are how breakpoints will be generated and watched on JS side.
 // Your custom media query rules will also get watched of course:
