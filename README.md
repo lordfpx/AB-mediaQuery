@@ -21,9 +21,9 @@ There are different ways to setup breakpoints and media queries rules. Default m
 
 ### Only JS with default settings: not recommanded
 
-Simple call `mediaQuery` function with no parameters:
+Simple call `abMediaQuery` function with no parameters:
 ```
-mediaQuery();
+abMediaQuery();
 ```
 
 You can go further by changing default settings, see below (**More options**) for available options.
@@ -72,9 +72,9 @@ Then import `_AB-mediaQuery.scss`:
 
 #### JS setup
 
-Simple call `mediaQuery` function with no parameters:
+Simple call `abMediaQuery` function with no parameters:
 ```
-mediaQuery();
+abMediaQuery();
 ```
 
 #### More options
@@ -82,7 +82,7 @@ mediaQuery();
 You can change default breakpoints values with `bp` object and the debounce time on window resize with `delay` option.
 
 ```
-mediaQuery({
+abMediaQuery({
   bp: {
     small:    '480em',
     medium:   '1024em',
