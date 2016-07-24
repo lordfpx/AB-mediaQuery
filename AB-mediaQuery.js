@@ -1,8 +1,12 @@
 !(function(name, definition) {
-  if (typeof module != 'undefined') module.exports = definition();
-  else if (typeof define == 'function' && typeof define.amd == 'object') define(definition);
-  else this[name] = definition();
-}('mediaQuery', function() {
+  if (typeof module != 'undefined') {
+    module.exports = definition();
+  } else if (typeof define == 'function' && typeof define.amd == 'object') {
+    define(definition);
+  } else {
+    this[name] = definition();
+  }
+}('abMediaQuery', function() {
 
   'use strict';
 
@@ -160,10 +164,10 @@
     }
   };
 
-  function mediaQuery(opt) {
+  function abMediaQuery(opt) {
     if (typeof window.AB === 'undefined') window.AB = {};
     window.AB.mediaQuery = new MediaQuery(opt);
   }
 
-  return mediaQuery;
+  return abMediaQuery;
 }));
