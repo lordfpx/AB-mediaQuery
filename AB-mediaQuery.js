@@ -1,14 +1,22 @@
 !(function(name, definition) {
-  if (typeof module != 'undefined') {
-    module.exports = definition();
-  } else if (typeof define == 'function' && typeof define.amd == 'object') {
-    define(definition);
-  } else {
-    this[name] = definition();
-  }
+  if (typeof module !== 'undefined') module.exports = definition();
+  else if (typeof define === 'function' && typeof define.amd === 'object') define(definition);
+  else this[name] = definition();
 }('abMediaQuery', function() {
 
-  'use strict';
+  // For IE 9 and 10 (https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
+  if (typeof window.CustomEvent !== 'function') {
+    function CustomEvent( event, params ){
+      params = params || { bubbles: false, cancelable: false, detail: undefined };
+      var evt = document.createEvent( 'CustomEvent' );
+      evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+      return evt;
+    }
+    CustomEvent.prototype = window.Event.prototype;
+    window.CustomEvent = CustomEvent;
+  }
+
+  'use strict'; // voluntarily after window.CustomEvent polyfill
 
   function extend(){
     for (var i=1; i<arguments.length; i++) {
@@ -30,18 +38,6 @@
 
   function startsWith(str, prefix) {
     return str.lastIndexOf(prefix, 0) === 0;
-  }
-
-  // For IE 9 and 10
-  if (typeof window.CustomEvent !== "function") {
-    function CustomEvent(event, params ){
-      params = params || { bubbles: false, cancelable: false, detail: undefined };
-      var evt = document.createEvent( 'CustomEvent' );
-      evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-      return evt;
-    }
-    CustomEvent.prototype = window.Event.prototype;
-    window.CustomEvent = CustomEvent;
   }
 
 
@@ -123,13 +119,12 @@
         if (window.matchMedia(that.queries[key]).matches) newMediaQueries.push(key);
       }
 
-      //if (typeof matched === 'object') return matched.name;
       return newMediaQueries;
     },
 
     _getQueries: function() {
       var metaMD = document.getElementById('AB-mediaQuery'),
-          fontMD = window.getComputedStyle(metaMD, null).getPropertyValue("font-family"),
+          fontMD = window.getComputedStyle(metaMD, null).getPropertyValue('font-family'),
           extractedStyles = decodeURI(fontMD.trim().slice(1, -1));
 
       return isJson(extractedStyles) ? JSON.parse(extractedStyles) : this.settings.bp;
@@ -142,7 +137,7 @@
 
     _watcher: function() {
       var that = this,
-          event = new CustomEvent('changed.ab-mediaquery'),
+          event = new Event('changed.ab-mediaquery'),
           newSize, resizeTimer;
 
       window.onresize = function() {
