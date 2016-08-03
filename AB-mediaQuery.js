@@ -78,28 +78,25 @@
 
       var namedQueries = this._getQueries();
 
-      // 'tiny' rule since it's specific
-      this.queries['tinyOnly'] = 'screen and (max-width: '+ (parseFloat(namedQueries.small)-0.01) +'em)';
-
       // define other media queries
       for (var key in namedQueries) {
         if (!namedQueries.hasOwnProperty( key )) continue;
 
         switch (key) {
           case 'small':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries[key] +') and (max-width: '+ (parseFloat(namedQueries.medium)-0.01) +'em)';
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
+            this.queries[key + 'Only'] = 'screen and (max-width: '+ (parseFloat(namedQueries.small)-0.01) +'em)';
+            this.queries[key]          = 'screen and (min-width: '+ 0 +'em)';
             break;
           case 'medium':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries[key] +') and (max-width: '+ (parseFloat(namedQueries.large)-0.01) +'em)';
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.small +') and (max-width: '+ (parseFloat(namedQueries.medium)-0.01) +'em)';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries.small +')';
             break;
           case 'large':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries[key] +') and (max-width: '+ (parseFloat(namedQueries.huge)-0.01) +'em)';
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.medium +') and (max-width: '+ (parseFloat(namedQueries.large)-0.01) +'em)';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries.medium +')';
             break;
           case 'huge':
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries[key] +')';
+            this.queries[key]          = 'screen and (min-width: '+ namedQueries.large +')';
             break;
         }
 
