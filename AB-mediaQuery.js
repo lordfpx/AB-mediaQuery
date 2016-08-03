@@ -53,7 +53,7 @@
 
   MediaQuery.defaults = {
     bp: {
-      small:    '30em',
+      small:    '48em',
       medium:   '64em',
       large:    '80em',
       huge:     '90em'
@@ -96,6 +96,7 @@
             this.queries[key]          = 'screen and (min-width: '+ namedQueries.medium +')';
             break;
           case 'huge':
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.large +') and (max-width: '+ (parseFloat(namedQueries.huge)-0.01) +'em)';
             this.queries[key]          = 'screen and (min-width: '+ namedQueries.large +')';
             break;
         }
