@@ -135,7 +135,7 @@
 
     _watcher: function() {
       var that = this,
-          event = new Event('changed.ab-mediaquery'),
+          event = new CustomEvent('changed.ab-mediaquery'),
           newSize, resizeTimer;
 
       window.onresize = function() {
