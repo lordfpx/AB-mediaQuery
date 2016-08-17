@@ -9,7 +9,7 @@
   // For IE 9 and 10 (https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
   function customEventPolyfill(){
     if (typeof window.CustomEvent === 'function') return false;
-    console.log("poly");
+
     function CustomEvent(event, params) {
       params = params || { bubbles: false, cancelable: false, detail: undefined };
       var evt = document.createEvent('CustomEvent');
