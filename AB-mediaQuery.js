@@ -92,16 +92,16 @@
             this.queries[key]          = 'screen and (min-width: '+ 0 +'em)';
             break;
           case 'medium':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.small +') and (max-width: '+ (parseFloat(namedQueries.medium)) +'em)';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.small +') and (max-width: '+ namedQueries.medium +')';
             this.queries[key]          = 'screen and (min-width: '+ namedQueries.small +')';
             break;
           case 'large':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.medium + 0.01 +') and (max-width: '+ (parseFloat(namedQueries.large)) +'em)';
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries.medium + 0.01 +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ (parseFloat(namedQueries.medium)+0.01) +'em) and (max-width: '+ namedQueries.large +')';
+            this.queries[key]          = 'screen and (min-width: '+ (parseFloat(namedQueries.medium)+0.01) +'em)';
             break;
           case 'huge':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.large + 0.01 +') and (max-width: '+ (parseFloat(namedQueries.huge)) +'em)';
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries.large + 0.01 +')';
+            this.queries[key + 'Only'] = 'screen and (min-width: '+ (parseFloat(namedQueries.large)+0.01) +'em) and (max-width: '+ namedQueries.huge +')';
+            this.queries[key]          = 'screen and (min-width: '+ (parseFloat(namedQueries.large)+0.01) +'em)';
             break;
         }
 
