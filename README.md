@@ -1,6 +1,8 @@
 # AB-mediaQuery
 That's the JavaScript side of Media Queries on mobile first projects. It proposes you some very useful methods for your scripts.
 
+It's used on French website [ENGIE](https://particuliers.engie.fr/).
+
 Demo: [Codepen](http://codepen.io/lordfpx/pen/dXopOW?editors=0010)
 
 NPM: https://www.npmjs.com/package/ab-mediaquery
