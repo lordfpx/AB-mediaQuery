@@ -7,7 +7,7 @@ NPM: https://www.npmjs.com/package/ab-mediaquery
 
 > npm install ab-mediaquery
 
-The plugin is CommonJS and AMD compliant, in vanilla JS, with no dependencies.
+The plugin is CommonJS and AMD compliant, with no dependencies.
 
 ## Compatibility
 
@@ -17,18 +17,17 @@ Because of the usage of `matchMedia`, compatibility start with IE 10. To rise co
 
 ## SETUP
 
-There are different ways to setup breakpoints and media queries rules. Default media queries are in ** em ** unit, here is why: http://zellwk.com/blog/media-query-units/
+There are different ways to setup breakpoints and media queries rules. Default media queries are in **em** unit, here is why: http://zellwk.com/blog/media-query-units/
 
-### Only JS with default settings: not recommanded
+### Only JS with default settings
 
-Simple call `abMediaQuery` function with no parameters:
+Simply call `abMediaQuery` function with no parameters:
 ```
 abMediaQuery();
 ```
 
 You can go further by changing default settings, see below (**More options**) for available options.
 
-**Beware**, no CSS will be generated, you will only get JS side. Here are media queries that will be generated on JS side. **Please, reflect them in your CSS**:
 ```
 * small:      screen and (min-width: 0em)
 * smallOnly:  screen and (max-width: 47.99em)
@@ -40,7 +39,7 @@ You can go further by changing default settings, see below (**More options**) fo
 * hugeOnly:   screen and (min-width: 80.01em) and (max-width: 90em)
 ```
 
-### JS with Sass: recommanded
+### JS with Sass: The power in your hands ;-)
 
 #### Sass setup
 
@@ -97,7 +96,7 @@ abMediaQuery({
 
 ## USAGE
 
-### Current breakpoints
+### Get current breakpoints
 
 That will return an array of current breakpoints
 ```

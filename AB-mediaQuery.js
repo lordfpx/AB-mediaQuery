@@ -1,4 +1,4 @@
-!(function(name, definition) {
+;(function(name, definition) {
   if (typeof module !== 'undefined') module.exports = definition();
   else if (typeof define === 'function' && typeof define.amd === 'object') define(definition);
   else this[name] = definition();
@@ -23,9 +23,12 @@
   customEventPolyfill();
 
   function extend(){
-    for (var i=1; i<arguments.length; i++) {
+    for (var i = 1, len = arguments.length; i < len; i++) {
+      if (!arguments[i]) continue;
+
       for (var key in arguments[i]) {
-        if (arguments[i].hasOwnProperty(key)) arguments[0][key] = arguments[i][key];
+        if (!arguments[i].hasOwnProperty(key)) continue;
+        arguments[0][key] = arguments[i][key];
       }
     }
     return arguments[0];
