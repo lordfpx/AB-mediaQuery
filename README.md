@@ -11,7 +11,7 @@ NPM: https://www.npmjs.com/package/ab-mediaquery
 
 > npm install ab-mediaquery
 
-The plugin is CommonJS and AMD compliant, with no dependencies except 'anotherBrick'.
+The plugin is CommonJS and AMD compliant, with no dependencies except [anotherBrick](https://github.com/lordfpx/AB#readme).
 
 ## Compatibility
 
