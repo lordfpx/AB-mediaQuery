@@ -3,7 +3,7 @@ That's the JavaScript side of Media Queries. It proposes you some very useful me
 
 **This version 2 is a simplified and, hopefully, easier version to set up of AB-mediaQuery.**
 
-Demo: [Codepen](http://codepen.io/lordfpx/pen/dXopOW?editors=0010)
+Demo: [Codepen](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010)
 
 NPM: https://www.npmjs.com/package/ab-mediaquery
 
