@@ -5,6 +5,8 @@ That's the JavaScript side of Media Queries. It proposes you some very useful me
 
 Demo: [Codepen](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010)
 
+It's used on French website [ENGIE](https://particuliers.engie.fr/).
+
 NPM: https://www.npmjs.com/package/ab-mediaquery
 
 > npm install ab-mediaquery
