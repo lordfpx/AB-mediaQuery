@@ -11,7 +11,9 @@ NPM: https://www.npmjs.com/package/ab-mediaquery
 
 > npm install ab-mediaquery
 
-The plugin is CommonJS and AMD compliant, with no dependencies except [anotherBrick](https://github.com/lordfpx/AB#readme).
+The plugin is CommonJS and AMD compliant.
+
+The only dependency is [anotherBrick](https://github.com/lordfpx/AB#readme). It's a tiny script used by all AB collection.
 
 ## Compatibility
 
@@ -23,7 +25,7 @@ Because of the usage of `matchMedia`, compatibility start with IE 10. To rise co
 
 There are different ways to setup media queries rules. I encourage you to use **em** units, here is why: http://zellwk.com/blog/media-query-units/
 
-### Only JS with default settings
+You need to put AB.js before AB-mediaQuery. The best solution is to use browserify or Webpack and first import 'AB', then 'abMediaQuery'.
 
 Simply call `abMediaQuery` function with some parameters:
 ```

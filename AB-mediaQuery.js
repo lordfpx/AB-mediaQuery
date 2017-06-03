@@ -7,8 +7,6 @@
   'use strict';
 
   var MediaQuery = function(opt) {
-    if (!(this instanceof MediaQuery)) return new MediaQuery(opt);
-
     this.settings = AB.extend(MediaQuery.defaults, opt);
     this.queries  = this.settings.bp;
     this.current  = [];
@@ -64,7 +62,6 @@
   };
 
   function abMediaQuery(opt) {
-    if (typeof window.AB === 'undefined') window.AB = {};
     window.AB.mediaQuery = new MediaQuery(opt);
   }
 
