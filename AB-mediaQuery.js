@@ -9,7 +9,7 @@
   var MediaQuery = function(opt) {
     if (!(this instanceof MediaQuery)) return new MediaQuery(opt);
 
-    this.settings = extend({}, MediaQuery.defaults, opt);
+    this.settings = AB.extend(MediaQuery.defaults, opt);
     this.queries  = this.settings.bp;
     this.current  = [];
 

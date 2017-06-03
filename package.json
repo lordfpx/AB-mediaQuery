@@ -17,12 +17,14 @@
     "native",
     "mediaquery",
     "breakpoint",
-    "vanilla"
+    "vanilla",
+    "another-brick",
+    "AB"
   ],
   "author": "Thierry Philippe",
   "license": "ISC",
   "dependencies": {
-    "another-brick": "^1.0.0"
+    "another-brick": "^1.0.1"
   },
   "bugs": {
     "url": "https://github.com/lordfpx/AB-mediaQuery/issues"
