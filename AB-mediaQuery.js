@@ -23,15 +23,34 @@
   customEventPolyfill();
 
   function extend(){
-    for (var i = 1, len = arguments.length; i < len; i++) {
-      if (!arguments[i]) continue;
+    var extended = {},
+        deep = false,
+        i = 0,
+        length = arguments.length;
 
-      for (var key in arguments[i]) {
-        if (!arguments[i].hasOwnProperty(key)) continue;
-        arguments[0][key] = arguments[i][key];
-      }
+    if (Object.prototype.toString.call( arguments[0] ) === '[object Boolean]' ){
+      deep = arguments[0];
+      i++;
     }
-    return arguments[0];
+
+    var merge = function (obj) {
+      for (var prop in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+          if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+            extended[prop] = extend(true, extended[prop], obj[prop]);
+          } else {
+            extended[prop] = obj[prop];
+          }
+        }
+      }
+    };
+
+    for ( ; i < length; i++ ) {
+      var obj = arguments[i];
+      merge(obj);
+    }
+
+    return extended;
   }
 
   function isJson(str) {
@@ -43,101 +62,38 @@
     return true;
   }
 
-  function startsWith(str, prefix) {
-    return str.lastIndexOf(prefix, 0) === 0;
-  }
-
-
   var MediaQuery = function(opt) {
     if (!(this instanceof MediaQuery)) return new MediaQuery(opt);
 
     this.settings = extend({}, MediaQuery.defaults, opt);
-    this.queries  = {};
+    this.queries  = this.settings.bp;
     this.current  = [];
 
     this.init();
   };
 
   MediaQuery.defaults = {
-    bp: {
-      small:    '48em',
-      medium:   '64em',
-      large:    '80em',
-      huge:     '90em'
-    },
-    delay:      200
+    bp: {},
+    delay: 200
   };
 
   MediaQuery.prototype = {
     init: function() {
-      this._defineQueries();
       this.current = this._getCurrentSize();
       this._watcher();
 
       return this;
     },
 
-    _defineQueries: function() {
-      // Create #AB-mediaQuery element to extract mediaQueries from generated font-family CSS rule
-      var meta = document.createElement('meta');
-      meta.id = 'AB-mediaQuery';
-      document.getElementsByTagName('head')[0].appendChild(meta);
-
-      var namedQueries = this._getQueries();
-
-      // define other media queries
-      for (var key in namedQueries) {
-        if (!namedQueries.hasOwnProperty( key )) continue;
-
-        switch (key) {
-          case 'small':
-            this.queries[key + 'Only'] = 'screen and (max-width: '+ (parseFloat(namedQueries.small)-0.01) +'em)';
-            this.queries[key]          = 'screen and (min-width: '+ 0 +'em)';
-            break;
-          case 'medium':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ namedQueries.small +') and (max-width: '+ namedQueries.medium +')';
-            this.queries[key]          = 'screen and (min-width: '+ namedQueries.small +')';
-            break;
-          case 'large':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ (parseFloat(namedQueries.medium)+0.01) +'em) and (max-width: '+ namedQueries.large +')';
-            this.queries[key]          = 'screen and (min-width: '+ (parseFloat(namedQueries.medium)+0.01) +'em)';
-            break;
-          case 'huge':
-            this.queries[key + 'Only'] = 'screen and (min-width: '+ (parseFloat(namedQueries.large)+0.01) +'em) and (max-width: '+ namedQueries.huge +')';
-            this.queries[key]          = 'screen and (min-width: '+ (parseFloat(namedQueries.large)+0.01) +'em)';
-            break;
-        }
-
-        // add custom user rules if any:
-        if (startsWith(key, '*')) {
-          this.queries[key.replace('*','')] = namedQueries[key];
-        }
-      }
-    },
-
     _getCurrentSize: function() {
-      var that = this,
-          newMediaQueries = [];
+      var newMediaQueries = [];
 
-      for (var key in that.queries) {
-        if (!that.queries.hasOwnProperty( key )) continue;
-        if (window.matchMedia(that.queries[key]).matches) newMediaQueries.push(key);
+      for (var key in this.queries) {
+        if (!this.queries.hasOwnProperty( key )) continue;
+        if (window.matchMedia(this.queries[key]).matches) newMediaQueries.push(key);
       }
 
       return newMediaQueries;
-    },
-
-    _getQueries: function() {
-      var metaMD = document.getElementById('AB-mediaQuery'),
-          fontMD = window.getComputedStyle(metaMD, null).getPropertyValue('font-family'),
-          extractedStyles = decodeURI(fontMD.trim().slice(1, -1));
-
-      return isJson(extractedStyles) ? JSON.parse(extractedStyles) : this.settings.bp;
-    },
-
-    get: function(size) {
-      if (typeof size === 'undefined') return;
-      return this.queries[size];
     },
 
     _watcher: function() {
@@ -159,8 +115,7 @@
     },
 
     is: function(size) {
-      var query = this.get(size);
-      if (query) return window.matchMedia(query).matches;
+      return window.matchMedia(this.queries[size]).matches;
     }
   };
 
