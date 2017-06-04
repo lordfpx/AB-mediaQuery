@@ -62,7 +62,7 @@
   };
 
   function abMediaQuery(opt) {
-    if (!AB) {
+    if (typeof AB === 'undefined') {
       console.log("AB-mediaQuery require another-brick, please read README.md");
       return;
     }
