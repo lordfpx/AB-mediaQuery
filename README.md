@@ -1,19 +1,26 @@
 # AB-mediaQuery
-That's the JavaScript side of Media Queries. It proposes you some very useful methods for your developments.
+AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your developments.
 
-**This version 2 is a simplified and, hopefully, easier version to set up of AB-mediaQuery.**
+**This is the version 2. It's meant to be simpler to setup that v1.**
 
-Demo: [Codepen](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010)
+- [Codepen demo](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010)
+- [NPM](https://www.npmjs.com/package/ab-mediaquery)
+
+```
+> npm install ab-mediaquery
+```
+or
+```
+> yarn add ab-mediaquery
+```
+
+The plugin is **CommonJS** and **AMD** compliant (UMD).
+
+The only dependency is [anotherBrick](https://github.com/lordfpx/AB#readme). It's a tiny script used by all AB collection.
 
 It's used on French website [ENGIE](https://particuliers.engie.fr/).
 
-NPM: https://www.npmjs.com/package/ab-mediaquery
-
-> npm install ab-mediaquery
-
-The plugin is CommonJS and AMD compliant.
-
-The only dependency is [anotherBrick](https://github.com/lordfpx/AB#readme). It's a tiny script used by all AB collection.
+---
 
 ## Compatibility
 
@@ -23,14 +30,22 @@ Because of the usage of `matchMedia`, compatibility start with IE 10. To rise co
 
 ## SETUP
 
-There are different ways to setup media queries rules. I encourage you to use **em** units, here is why: http://zellwk.com/blog/media-query-units/
+### Classic usage
+You need to put AB.js (from [anotherBrick](https://github.com/lordfpx/AB)) script before loading AB-mediaQuery.js.
 
-You need to put AB.js before AB-mediaQuery. The best solution is to use browserify or Webpack and first import 'AB', then 'abMediaQuery'.
+### As a module
+The best solution is to use browserify or Webpack. First import 'AB', then 'abMediaQuery'.
 
+```
+import AB from 'another-brick';
+import abMediaQuery from 'ab-mediaquery';
+```
+
+### For both solutions
 Simply call `abMediaQuery` function with some parameters:
 ```
 abMediaQuery({
-  // define your media queries here
+  // freely define your media queries here
   bp: {
     smallOnly: 'screen and (max-width: 767px)',
     mediumOnly: 'screen and (min-width: 768px) and (max-width: 1024px)',
@@ -44,14 +59,13 @@ abMediaQuery({
 });
 ```
 
-Set a reasonable debounce delay to prevent too much browser work.
+Set a reasonable debounce delay to keep good performances.
 
 ---
 
 ## USAGE
 
 ### Get current breakpoints
-
 That will return an array of current breakpoints
 ```
 AB.mediaQuery.current;
@@ -61,7 +75,8 @@ AB.mediaQuery.current;
 Check if window respects the specified media query and return true/false.
 
 ```
-AB.mediaQuery.is('media-query-name-you-want-to-check);
+AB.mediaQuery.is('mediumOnly');
+// will return true or false
 ```
 
 ### JS event
