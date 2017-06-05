@@ -39,7 +39,7 @@
     },
 
     _watcher: function() {
-      var that  = this,
+      var that = this,
           event = new CustomEvent('changed.ab-mediaquery'),
           newSize, resizeTimer;
 
@@ -62,12 +62,7 @@
   };
 
   function abMediaQuery(opt) {
-    if (typeof AB === 'undefined') {
-      console.log("AB-mediaQuery require another-brick, please read README.md");
-      return;
-    }
-
-    AB.mediaQuery = new MediaQuery(opt);
+    window.AB.mediaQuery = new MediaQuery(opt);
   }
 
   return abMediaQuery;
