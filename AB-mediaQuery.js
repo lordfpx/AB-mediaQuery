@@ -7,7 +7,7 @@
   'use strict';
 
   var Plugin = function(opt) {
-    this.settings = AB.extend(MediaQuery.defaults, opt);
+    this.settings = AB.extend(Plugin.defaults, opt);
     this.queries  = this.settings.bp;
     this.current  = [];
 
