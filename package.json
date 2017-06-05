@@ -8,7 +8,8 @@
     "url": "https://github.com/lordfpx/AB-mediaQuery.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "keywords": [
     "javascript",
