@@ -18,7 +18,7 @@ The plugin is **CommonJS** and **AMD** compliant (UMD).
 
 The only dependency is [anotherBrick](https://github.com/lordfpx/AB#readme). It's a tiny script used by all AB collection.
 
-It's used on French website [ENGIE](https://particuliers.engie.fr/).
+The v1 is used on French website [ENGIE](https://particuliers.engie.fr/).
 
 ---
 
