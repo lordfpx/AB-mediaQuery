@@ -6,7 +6,7 @@
 
   'use strict';
 
-  var MediaQuery = function(opt) {
+  var Plugin = function(opt) {
     this.settings = AB.extend(MediaQuery.defaults, opt);
     this.queries  = this.settings.bp;
     this.current  = [];
@@ -14,12 +14,12 @@
     this.init();
   };
 
-  MediaQuery.defaults = {
+  Plugin.defaults = {
     bp: {},
     delay: 200
   };
 
-  MediaQuery.prototype = {
+  Plugin.prototype = {
     init: function() {
       this.current = this._getCurrentSize();
       this._watcher();
@@ -62,7 +62,7 @@
   };
 
   function abMediaQuery(opt) {
-    window.AB.mediaQuery = new MediaQuery(opt);
+    window.AB.mediaQuery = new Plugin(opt);
   }
 
   return abMediaQuery;
