@@ -21,33 +21,37 @@
 
   Plugin.prototype = {
     init: function() {
-      this.current = this._getCurrentSize();
+      this.current = this._getCurrent();
       this._watcher();
 
       return this;
     },
 
-    _getCurrentSize: function() {
-      var newMediaQueries = [];
+    _getCurrent: function() {
+      var sizes = [];
 
       for (var key in this.queries) {
-        if (!this.queries.hasOwnProperty( key )) continue;
-        if (window.matchMedia(this.queries[key]).matches) newMediaQueries.push(key);
+        if (!this.queries.hasOwnProperty(key))
+          continue;
+
+        if (window.matchMedia(this.queries[key]).matches)
+          sizes.push(key);
       }
 
-      return newMediaQueries;
+      return sizes;
     },
 
     _watcher: function() {
-      var that = this,
+      var that  = this,
           event = new CustomEvent('changed.ab-mediaquery'),
           newSize, resizeTimer;
 
       window.onresize = function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-          newSize = that._getCurrentSize();
+          newSize = that._getCurrent();
 
+          // check if it's updated
           if (newSize.join('|') !== that.current.join('|')) {
             that.current = newSize;
             window.dispatchEvent(event);
@@ -61,9 +65,9 @@
     }
   };
 
-  function abMediaQuery(opt) {
-    window.AB.mediaQuery = new Plugin(opt);
-  }
+  var abMediaQuery = function(opt) {
+    AB.mediaQuery = new Plugin(opt);
+  };
 
   return abMediaQuery;
 }));
