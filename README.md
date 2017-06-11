@@ -1,6 +1,8 @@
 # AB-mediaQuery
 AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your developments.
 
+It's damn small: **less than 1000 bytes** (uglyfied and GZipped, including AB.js).
+
 **This is the version 2. It's meant to be simpler to setup that v1.**
 
 - [Codepen demo](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010)
