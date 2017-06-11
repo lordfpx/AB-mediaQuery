@@ -24,7 +24,7 @@ The v1 is used on French website [ENGIE](https://particuliers.engie.fr/).
 
 ## Compatibility
 
-Because of the usage of `matchMedia`, compatibility start with IE 10. To rise compatibility up to IE 9, you can add https://github.com/paulirish/matchMedia.js/ polyfill.
+Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility start with IE 10. To rise compatibility up to IE 9, you can add [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) and [requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671).
 
 ---
 
@@ -52,14 +52,9 @@ abMediaQuery({
     medium: 'screen and (min-width: 768px)',
     largeOnly: 'screen and (min-width: 1025px) and (max-width: 1280px)',
     large: 'screen and (min-width: 1025px)'
-  },
-
-  // the debounce delay on window resize (default 200)
-  delay: 200
+  }
 });
 ```
-
-Set a reasonable debounce delay to keep good performances.
 
 ---
 

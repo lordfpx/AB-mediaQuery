@@ -10,13 +10,13 @@
     this.settings = AB.extend(Plugin.defaults, opt);
     this.queries  = this.settings.bp;
     this.current  = [];
+    this.animated = false;
 
     this.init();
   };
 
   Plugin.defaults = {
-    bp: {},
-    delay: 200
+    bp: {}
   };
 
   Plugin.prototype = {
@@ -47,17 +47,24 @@
           newSize, resizeTimer;
 
       window.onresize = function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-          newSize = that._getCurrent();
-
-          // check if it's updated
-          if (newSize.join('|') !== that.current.join('|')) {
-            that.current = newSize;
-            window.dispatchEvent(event);
-          }
-        }, that.settings.delay);
+      	if (!that.animated) {
+          window.requestAnimationFrame(that._updateSizes.bind(that));
+          that.animated = true;
+        }
       };
+    },
+
+    _updateSizes: function() {
+      var newSize = this._getCurrent(),
+      		event   = new CustomEvent('changed.ab-mediaquery');
+
+      this.animated = false;
+
+      // check if it's updated
+      if (newSize.join('|') !== this.current.join('|')) {
+        this.current = newSize;
+        window.dispatchEvent(event);
+      }
     },
 
     is: function(size) {
