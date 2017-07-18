@@ -3,7 +3,7 @@
 var AB = require('another-brick');
 
 var Plugin = function(opt) {
-  this.settings = AB.extend(true, Plugin.defaults, opt);
+  this.settings = window.AB.extend(true, Plugin.defaults, opt);
   this.queries  = this.settings.bp;
   this.current  = [];
   this.animated = false;
@@ -68,8 +68,6 @@ Plugin.prototype = {
   }
 };
 
-var abMediaQuery = function(opt) {
-  AB.mediaQuery = new Plugin(opt);
+window.abMediaQuery = function(opt) {
+  window.AB.mediaQuery = new Plugin(opt);
 };
-
-module.exports = abMediaQuery;

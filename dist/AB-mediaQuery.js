@@ -73,7 +73,7 @@
 var AB = __webpack_require__(1);
 
 var Plugin = function(opt) {
-  this.settings = AB.extend(true, Plugin.defaults, opt);
+  this.settings = window.AB.extend(true, Plugin.defaults, opt);
   this.queries  = this.settings.bp;
   this.current  = [];
   this.animated = false;
@@ -138,11 +138,9 @@ Plugin.prototype = {
   }
 };
 
-var abMediaQuery = function(opt) {
-  AB.mediaQuery = new Plugin(opt);
+window.abMediaQuery = function(opt) {
+  window.AB.mediaQuery = new Plugin(opt);
 };
-
-module.exports = abMediaQuery;
 
 /***/ }),
 /* 1 */
@@ -161,7 +159,7 @@ module.exports = abMediaQuery;
   window.CustomEvent = CustomEvent;
 })();
 
-// main AB object
+// main public AB object
 var AB = {
   // deep extend function
   extend: function() {
@@ -179,7 +177,7 @@ var AB = {
       for (var prop in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
-            extended[prop] = AB.extend(true, extended[prop], obj[prop]);
+            extended[prop] = window.AB.extend(true, extended[prop], obj[prop]);
           } else {
             extended[prop] = obj[prop];
           }
@@ -204,11 +202,8 @@ var AB = {
     return true;
   },
 
-  // where all AB plugins are stored
   plugins: {}
 };
-
-module.exports = AB;
 
 /***/ })
 /******/ ]);

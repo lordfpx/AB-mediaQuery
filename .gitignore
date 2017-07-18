@@ -67,3 +67,5 @@ $RECYCLE.BIN/
 
 # Dependency directories
 node_modules/
+
+.vscode/
