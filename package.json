@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/lordfpx/AB-mediaQuery#readme",
   "dependencies": {
-    "another-brick": "^1.0.5"
+    "another-brick": "git://github.com/lordfpx/AB.git#develop"
   },
   "devDependencies": {
     "webpack": "^3.3.0"

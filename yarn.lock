@@ -48,9 +48,9 @@ align-text@^0.1.1, align-text@^0.1.3:
     longest "^1.0.1"
     repeat-string "^1.5.2"
 
-another-brick@^1.0.5:
+"another-brick@git://github.com/lordfpx/AB.git#develop":
   version "1.0.5"
-  resolved "https://registry.yarnpkg.com/another-brick/-/another-brick-1.0.5.tgz#77649cf6ca784f124c876516caa3533a3bcbe058"
+  resolved "git://github.com/lordfpx/AB.git#60c70ba45b3f2a382dc396efc6941c3bd9a22dd6"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
