@@ -16,8 +16,6 @@ or
 > yarn add ab-mediaquery
 ```
 
-The plugin is **CommonJS** and **AMD** compliant (UMD).
-
 The v1 is used on the French website [ENGIE](https://particuliers.engie.fr/).
 
 ---
