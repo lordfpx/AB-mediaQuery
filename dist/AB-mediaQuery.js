@@ -160,7 +160,7 @@ window.abMediaQuery = function(opt) {
 })();
 
 // main public AB object
-var AB = {
+window.AB = {
   // deep extend function
   extend: function() {
     var extended = {},

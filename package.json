@@ -9,8 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postversion": "git push && git push --tags && npm publish",
-    "build": "webpack index.js dist/AB-mediaQuery.js"
+    "build": "webpack index.js dist/AB-mediaQuery.js && webpack index.js dist/AB-mediaQuery.min.js --optimize-minimize"
   },
   "keywords": [
     "javascript",
