@@ -1,7 +1,7 @@
 # AB-mediaQuery
 AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your developments.
 
-It's damn small: **less than 1000 bytes** (uglyfied and GZipped, including AB.js).
+It's damn small: **less than 1000 bytes** (uglyfied and GZipped).
 
 **This is the version 2. It's meant to be simpler to setup that v1.**
 
@@ -16,11 +16,7 @@ or
 > yarn add ab-mediaquery
 ```
 
-The plugin is **CommonJS** and **AMD** compliant (UMD).
-
-The only dependency is [anotherBrick](https://github.com/lordfpx/AB#readme). It's a tiny script used by all AB collection.
-
-The v1 is used on French website [ENGIE](https://particuliers.engie.fr/).
+The v1 is used on the French website [ENGIE](https://particuliers.engie.fr/).
 
 ---
 
@@ -33,27 +29,29 @@ Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility 
 ## SETUP
 
 ### Classic usage
-You need to put AB.js (from [anotherBrick](https://github.com/lordfpx/AB)) script before loading AB-mediaQuery.js.
+Just load the script on your page, just before `</body>`.
+
+**No need to load [another-brick](https://github.com/lordfpx/AB) since it's already included into AB-interchange. You can use its features of course.**
 
 ### As a module
-The best solution is to use browserify or Webpack. First import 'AB', then 'abMediaQuery'.
+The best solution is to use browserify or Webpack and import 'abMediaQuery'.
 
 ```
-import AB from 'another-brick';
 import abMediaQuery from 'ab-mediaquery';
 ```
 
-### For both solutions
-Simply call `abMediaQuery` function with some parameters:
+### in both cases:
+Simply call `abMediaQuery` function your break points based on your needs:
+
 ```
 abMediaQuery({
   // freely define your media queries here
   bp: {
-    smallOnly: 'screen and (max-width: 767px)',
+    smallOnly:  'screen and (max-width: 767px)',
     mediumOnly: 'screen and (min-width: 768px) and (max-width: 1024px)',
-    medium: 'screen and (min-width: 768px)',
-    largeOnly: 'screen and (min-width: 1025px) and (max-width: 1280px)',
-    large: 'screen and (min-width: 1025px)'
+    medium:     'screen and (min-width: 768px)',
+    largeOnly:  'screen and (min-width: 1025px) and (max-width: 1280px)',
+    large:      'screen and (min-width: 1025px)'
   }
 });
 ```
@@ -69,7 +67,7 @@ AB.mediaQuery.current;
 ```
 
 ### Check specific breakpoint case
-Check if window respects the specified media query and return true/false.
+Check if the window respects the specified media query and return true/false.
 
 ```
 AB.mediaQuery.is('mediumOnly');
@@ -77,7 +75,7 @@ AB.mediaQuery.is('mediumOnly');
 ```
 
 ### JS event
-'changed.ab-mediaquery' event is automatically triggered when breakpoints change:
+'changed.ab-mediaquery' event is automatically triggered when media query changes, you can listen:
 
 ```
 window.addEventListener('changed.ab-mediaquery', function(){

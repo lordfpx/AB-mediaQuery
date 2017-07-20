@@ -1,15 +1,19 @@
 {
   "name": "ab-mediaquery",
+<<<<<<< HEAD
   "version": "2.5.0",
+=======
+  "version": "2.4.1",
+>>>>>>> eea5b3233b171f148db2705c4e2cdf4f7d139d5e
   "description": "AB-mediaQuery is the JavaScript side of Media Queries. It proposes you some very useful methods for your scripts",
-  "main": "AB-mediaQuery.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/lordfpx/AB-mediaQuery.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postversion": "git push && git push --tags && npm publish"
+    "build": "webpack index.js dist/AB-mediaQuery.js && webpack index.js dist/AB-mediaQuery.min.js --optimize-minimize"
   },
   "keywords": [
     "javascript",
@@ -27,6 +31,9 @@
   },
   "homepage": "https://github.com/lordfpx/AB-mediaQuery#readme",
   "dependencies": {
-    "another-brick": "^1.0.3"
+    "another-brick": "git://github.com/lordfpx/AB.git#develop"
+  },
+  "devDependencies": {
+    "webpack": "^3.3.0"
   }
 }
