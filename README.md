@@ -31,6 +31,8 @@ Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility 
 ### Classic usage
 Just load the script on your page, just before `</body>`.
 
+**No need to load [another-brick](https://github.com/lordfpx/AB) since it's already included into AB-interchange. You can use its features of course.**
+
 ### As a module
 The best solution is to use browserify or Webpack and import 'abMediaQuery'.
 
