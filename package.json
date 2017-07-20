@@ -1,10 +1,6 @@
 {
   "name": "ab-mediaquery",
-<<<<<<< HEAD
   "version": "2.5.0",
-=======
-  "version": "2.4.1",
->>>>>>> eea5b3233b171f148db2705c4e2cdf4f7d139d5e
   "description": "AB-mediaQuery is the JavaScript side of Media Queries. It proposes you some very useful methods for your scripts",
   "main": "index.js",
   "repository": {
