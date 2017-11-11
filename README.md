@@ -12,6 +12,7 @@ It's damn small: <strong>less than 1000 bytes</strong> (uglyfied and GZipped).
 Have a look at the <a href="https://codepen.io/lordfpx/pen/MeaWmV?editors=0010" target="_blank">Codepen demonstration</a>.
 </p>
 
+<a href="https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability"><img src="https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability" /></a>
 
 <h2 align="center">Install</h2>
 
