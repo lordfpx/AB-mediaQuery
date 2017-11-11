@@ -1,51 +1,46 @@
-# AB-mediaQuery
-AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your developments.
+<h1 align="center">AB-mediaQuery</h1>
 
-It's damn small: **less than 1000 bytes** (uglyfied and GZipped).
+<p align="center">
+AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your responsive developments. This is a small, dependencie free and vanilla JavaScript components. Version 1 is used in the French website of <a href="https://particuliers.engie.fr" target="_blank">ENGIE</a>.
+</p>
 
-**This is the version 2. It's meant to be simpler to setup that v1.**
+<p align="center">
+It's damn small: <strong>less than 1000 bytes</strong> (uglyfied and GZipped).
+</p>
 
-- [Codepen demo](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010)
-- [NPM](https://www.npmjs.com/package/ab-mediaquery)
+<p align="center">
+Have a look at the <a href="https://codepen.io/lordfpx/pen/MeaWmV?editors=0010" target="_blank">Codepen demonstration</a>.
+</p>
 
+
+<h2 align="center">Install</h2>
+
+Install with npm:
 ```
-> npm install ab-mediaquery
+npm install --save ab-mediaquery
+````
+
+Install with yarn:
 ```
-or
-```
-> yarn add ab-mediaquery
+yarn add ab-mediaquery
 ```
 
-The v1 is used on the French website [ENGIE](https://particuliers.engie.fr/).
+Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility start from IE 10. To rise compatibility up to IE 9, you can add [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) and [requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671).
 
----
 
-## Compatibility
 
-Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility start with IE 10. To rise compatibility up to IE 9, you can add [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) and [requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671).
+<h2 align="center">Setup</h2>
 
----
-
-## SETUP
-
-### Classic usage
-Just load the script on your page, just before `</body>`.
-
-**No need to load [another-brick](https://github.com/lordfpx/AB) since it's already included into AB-interchange. You can use its features of course.**
-
-### As a module
-The best solution is to use browserify or Webpack and import 'abMediaQuery'.
-
-```
+You can then import it in your JS bundle (webpack, ES6, browserify...):
+```js
 import abMediaQuery from 'ab-mediaquery';
 ```
 
-### in both cases:
-Simply call `abMediaQuery` function your break points based on your needs:
+Or loading the js right before `</body>` if you are not using a builder.
 
-```
+Then call it from your JavaScript with your media queries:
+```js
 abMediaQuery({
-  // freely define your media queries here
   bp: {
     smallOnly:  'screen and (max-width: 767px)',
     mediumOnly: 'screen and (min-width: 768px) and (max-width: 1024px)',
@@ -56,28 +51,28 @@ abMediaQuery({
 });
 ```
 
----
 
-## USAGE
 
-### Get current breakpoints
-That will return an array of current breakpoints
-```
-AB.mediaQuery.current;
-```
+<h2 align="center">Usage</h2>
 
-### Check specific breakpoint case
-Check if the window respects the specified media query and return true/false.
+- Get current breakpoints
+  ```js
+  AB.mediaQuery.current;
 
-```
-AB.mediaQuery.is('mediumOnly');
-// will return true or false
-```
+  // return an array of current breakpoints
+  ```
 
-### JS event
-'changed.ab-mediaquery' event is automatically triggered when media query changes, you can listen:
+- Check specific breakpoint case
+  ```js
+  AB.mediaQuery.is('mediumOnly');
 
-```
+  // will return true or false
+  ```
+
+- JavaScript event
+`changed.ab-mediaquery` event is triggered when media query changes, you can listen to it:
+
+```js
 window.addEventListener('changed.ab-mediaquery', function(){
   ...
 });
