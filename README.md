@@ -1,36 +1,31 @@
-<h1 align="center">AB-mediaQuery</h1>
+[AB on Github](https://github.com/lordfpx/AB-mediaQuery)
 
-<p align="center">
-AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your responsive developments. This is a small, dependencie free and vanilla JavaScript components. Version 1 is used in the French website of <a href="https://particuliers.engie.fr" target="_blank">ENGIE</a>.
-</p>
+AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your responsive developments. This is a small, dependencie free and vanilla JavaScript components. Version 1 is used in the French website of [ENGIE](https://particuliers.engie.fr).
 
-<p align="center">
-It's damn small: <strong>less than 1000 bytes</strong> (uglyfied and GZipped).
-</p>
+It's damn small: **less than 1000 bytes** (uglyfied and GZipped).
 
-<p align="center">
-Have a look at the <a href="https://codepen.io/lordfpx/pen/MeaWmV?editors=0010" target="_blank">Codepen demonstration</a>.
-</p>
+Have a look at the [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010).
 
-<a href="https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability"><img src="https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability)](https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability)
 
-<h2 align="center">Install</h2>
+## Install
 
 Install with npm:
-```
+
+```bash
 npm install --save ab-mediaquery
 ````
 
 Install with yarn:
-```
+
+```bash
 yarn add ab-mediaquery
 ```
 
 Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility start from IE 10. To rise compatibility up to IE 9, you can add [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) and [requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671).
 
 
-
-<h2 align="center">Setup</h2>
+## Setup
 
 You can then import it in your JS bundle (webpack, ES6, browserify...):
 ```js
@@ -53,8 +48,7 @@ abMediaQuery({
 ```
 
 
-
-<h2 align="center">Usage</h2>
+## Usage
 
 - Get current breakpoints
   ```js
@@ -71,11 +65,10 @@ abMediaQuery({
   ```
 
 - JavaScript event
-`changed.ab-mediaquery` event is triggered when media query changes, you can listen to it:
+  `changed.ab-mediaquery` event is triggered when media query changes, you can listen to it:
 
-```js
-window.addEventListener('changed.ab-mediaquery', function(){
-  ...
-});
-```
-
+  ```js
+  window.addEventListener('changed.ab-mediaquery', function(){
+    ...
+  });
+  ```
