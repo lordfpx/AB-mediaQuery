@@ -1,3 +1,5 @@
+# AB-mediaQuery
+
 [AB on Github](https://github.com/lordfpx/AB-mediaQuery)
 
 AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your responsive developments. This is a small, dependencie free and vanilla JavaScript components. Version 1 is used in the French website of [ENGIE](https://particuliers.engie.fr).
