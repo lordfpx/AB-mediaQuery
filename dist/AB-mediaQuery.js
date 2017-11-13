@@ -78,7 +78,7 @@ var Plugin = function(opt) {
   this.current  = [];
   this.animated = false;
 
-  this.init();
+  this._init();
 };
 
 Plugin.defaults = {
@@ -86,7 +86,7 @@ Plugin.defaults = {
 };
 
 Plugin.prototype = {
-  init: function() {
+  _init: function() {
     this.current = this._getCurrent();
     this._watcher();
 
@@ -108,16 +108,14 @@ Plugin.prototype = {
   },
 
   _watcher: function() {
-    var that  = this,
-        event = new CustomEvent('changed.ab-mediaquery'),
-        newSize, resizeTimer;
+    var that  = this;
 
-    window.onresize = function() {
+    window.addEventListener('resize', function() {
       if (!that.animated) {
         window.requestAnimationFrame(that._updateSizes.bind(that));
         that.animated = true;
       }
-    };
+    });
   },
 
   _updateSizes: function() {
@@ -141,6 +139,7 @@ Plugin.prototype = {
 window.abMediaQuery = function(opt) {
   window.AB.mediaQuery = new Plugin(opt);
 };
+
 
 /***/ }),
 /* 1 */
