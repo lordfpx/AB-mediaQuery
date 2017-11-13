@@ -11,13 +11,11 @@ Have a look at the [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV
 ## Install
 
 Install with npm:
-
 ```bash
 npm install --save ab-mediaquery
 ````
 
 Install with yarn:
-
 ```bash
 yarn add ab-mediaquery
 ```
