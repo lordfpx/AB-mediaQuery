@@ -1,8 +1,10 @@
 # AB-mediaQuery
 
-AB-mediaQuery is the JavaScript side of Media Queries. It proposes some useful methods for your responsive developments. This is a small, dependencie free and vanilla JavaScript components. Version 1 is used in the French website of [ENGIE](https://particuliers.engie.fr).
+AB-mediaQuery is the JavaScript side of Media Queries. It's very simple, yet convenient tool for your developments.
 
-It's damn small: **less than 1000 bytes** (uglyfied and GZipped).
+This is small, dependencie free and vanilla JavaScript. Version 1 is used in the French website of [ENGIE](https://particuliers.engie.fr).
+
+It's damn small: **less than 900 bytes** (uglyfied and GZipped)!
 
 Have a look at the [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010).
 
@@ -15,24 +17,22 @@ Install with npm:
 npm install --save ab-mediaquery
 ````
 
-Install with yarn:
-```bash
-yarn add ab-mediaquery
-```
-
 Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility start from IE 10. To rise compatibility up to IE 9, you can add [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) and [requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671).
 
 
 ## Setup
 
-You can then import it in your JS bundle (webpack, ES6, browserify...):
+### Install
+Just import it in your JS bundle (webpack, ES6, browserify...):
 ```js
 import abMediaQuery from 'ab-mediaquery';
 ```
 
 Or loading the js right before `</body>` if you are not using a builder.
 
-Then call it from your JavaScript with your media queries:
+
+### Init
+
 ```js
 abMediaQuery({
   bp: {
@@ -45,20 +45,31 @@ abMediaQuery({
 });
 ```
 
+Other example:
+
+```js
+abMediaQuery({
+  bp: {
+    tiny: "screen and (max-width: 575px)",
+    small: "screen and (min-width: 576px)",
+    medium: "screen and (min-width: 768px)",
+    large: "screen and (min-width: 992px)",
+    huge: "screen and (min-width: 1200px)"
+  }
+});
+```
 
 ## Usage
 
 - Get current breakpoints
   ```js
   AB.mediaQuery.current;
-
   // return an array of current breakpoints
   ```
 
 - Check specific breakpoint case
   ```js
   AB.mediaQuery.is('mediumOnly');
-
   // will return true or false
   ```
 
