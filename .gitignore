@@ -3,7 +3,6 @@
 logs
 *.log
 npm-debug.log*
-node_modules
 
 ### OSX ###
 .DS_Store
@@ -65,3 +64,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Dependency directories
+node_modules/
+
+.vscode/
