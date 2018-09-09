@@ -72,69 +72,58 @@
 
 var AB = __webpack_require__(1);
 
-var settings = {
-  bp: {}
-};
-
-var _init = function() {
-  this.current = _getCurrent.call(this);
-  _watcher.call(this);
-};
-
-var _getCurrent = function() {
-  var sizes = [];
-
-  for (var key in this.settings.bp) {
-    if (!this.settings.bp.hasOwnProperty(key))
-      continue;
-
-    if (window.matchMedia(this.settings.bp[key]).matches)
-      sizes.push(key);
-  }
-
-  return sizes;
-};
-
-var _watcher = function() {
-  var that = this;
-
-  window.addEventListener('resize', function() {
-    if (!that._animated) {
-      window.requestAnimationFrame(_updateSizes.bind(that));
-      that._animated = true;
-    }
-  });
-};
-
-var _updateSizes = function() {
-  var newSize = _getCurrent.call(this);
-
-  this._animated = false;
-
-  // check if it's updated
-  if (newSize.join('|') !== this.current.join('|')) {
-    this.current = newSize;
-    window.dispatchEvent(new CustomEvent('changed.ab-mediaquery'));
-  }
-};
-
-
-var Plugin = function(opt) {
-  this.settings  = window.AB.extend(true, settings, opt);
-  this.current   = [];
-  this._animated = false;
-
-  _init.call(this);
-};
-
-Plugin.prototype = {
-  is: function(size) {
-    return window.matchMedia(this.settings.bp[size]).matches;
-  }
-};
-
 window.abMediaQuery = function(opt) {
-  window.AB.mediaQuery = new Plugin(opt);
+  window.AB.mediaQuery = (function() {
+    var _settings = opt || {bp: {}},
+        _animated = false;
+
+    var _getCurrent = function() {
+      var sizes = [];
+
+      for (var key in _settings.bp) {
+        if (!_settings.bp.hasOwnProperty(key))
+          continue;
+
+        if (window.matchMedia(_settings.bp[key]).matches)
+          sizes.push(key);
+      }
+
+      return sizes;
+    };
+
+    var _updateSizes = function() {
+      var newSize = _getCurrent();
+
+      // check if it's updated
+      if (newSize.join('|') !== _currentStore.join('|')) {
+        _currentStore = newSize;
+        window.dispatchEvent(new CustomEvent('changed.ab-mediaquery'));
+      }
+
+      _animated = false;
+    };
+
+    var is = function(size) {
+      if (_settings.bp[size])
+        return window.matchMedia(_settings.bp[size]).matches;
+    };
+
+    // get current breakpoints
+    var _currentStore = _getCurrent()
+
+    // change on resize
+    window.addEventListener('resize', function() {
+      if (!_animated) {
+        window.requestAnimationFrame(_updateSizes);
+        _animated = true;
+      }
+    });
+
+    return {
+      get current() { return _currentStore; },
+      is: is
+    };
+  })();
 };
 
 
