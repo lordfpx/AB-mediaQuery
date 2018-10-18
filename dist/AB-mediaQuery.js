@@ -70,22 +70,19 @@
 "use strict";
 
 
-var AB = __webpack_require__(1);
+window.AB = __webpack_require__(1);
 
-window.abMediaQuery = function(opt) {
+var mediaQuery = function(opt) {
   window.AB.mediaQuery = (function() {
-    var _settings = opt || {bp: {}},
-        _animated = false;
+    var _settings = opt || {bp: {}};
 
     var _getCurrent = function() {
       var sizes = [];
 
       for (var key in _settings.bp) {
-        if (!_settings.bp.hasOwnProperty(key))
-          continue;
-
-        if (window.matchMedia(_settings.bp[key]).matches)
+        if (_settings.bp.hasOwnProperty(key) && window.matchMedia(_settings.bp[key]).matches) {
           sizes.push(key);
+        }
       }
 
       return sizes;
@@ -99,8 +96,6 @@ window.abMediaQuery = function(opt) {
         _currentStore = newSize;
         window.dispatchEvent(new CustomEvent('changed.ab-mediaquery'));
       }
-
-      _animated = false;
     };
 
     var is = function(size) {
@@ -112,12 +107,7 @@ window.abMediaQuery = function(opt) {
     var _currentStore = _getCurrent()
 
     // change on resize
-    window.addEventListener('resize', function() {
-      if (!_animated) {
-        window.requestAnimationFrame(_updateSizes);
-        _animated = true;
-      }
-    });
+    window.addEventListener('ab-resize', _updateSizes);
 
     return {
       get current() { return _currentStore; },
@@ -125,6 +115,10 @@ window.abMediaQuery = function(opt) {
     };
   })();
 };
+
+
+window.AB.plugins.mediaQuery = mediaQuery;
+module.exports = window.AB;
 
 
 /***/ }),
@@ -144,7 +138,30 @@ window.abMediaQuery = function(opt) {
   window.CustomEvent = CustomEvent;
 })();
 
-// main public AB object
+// throttle events with requestAnimationFrame
+(function() {
+  var throttle = function(type, name) {
+    var running = false;
+    var func = function() {
+      if (running) return;
+
+      running = true;
+        window.requestAnimationFrame(function() {
+          window.dispatchEvent(new CustomEvent(name));
+          running = false;
+      });
+    };
+    window.addEventListener(type, func);
+  };
+
+  /* init - you can init any event */
+  throttle("resize", "ab-resize");
+  throttle("scroll", "ab-scroll");
+  throttle("mousemove", "ab-mousemove");
+  throttle("touchmove", "ab-touchmove");
+})();
+
+
 window.AB = {
   // deep extend function
   extend: function() {
@@ -187,8 +204,23 @@ window.AB = {
     return true;
   },
 
-  plugins: {}
+  runUpdaters: function(plugin) {
+    if (window.AB.options[plugin]) {
+      window.AB.plugins[plugin](window.AB.options[plugin]);
+    } else {
+      for(var options in AB.options){
+        if(window.AB.options.hasOwnProperty(options))
+          window.AB.plugins[options](window.AB.options[options]);
+      }
+    }
+  },
+
+  plugins: {},
+  options: {}
 };
+
+module.exports = window.AB;
+
 
 /***/ })
 /******/ ]);

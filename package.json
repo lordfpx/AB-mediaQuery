@@ -1,8 +1,9 @@
 {
   "name": "ab-mediaquery",
   "version": "2.6.1",
-  "description": "AB-mediaQuery is the JavaScript side of Media Queries. It proposes you some very useful methods for your scripts",
+  "description": "AB-mediaQuery is the JavaScript side of media queries. It proposes you some very useful methods for your scripts",
   "main": "index.js",
+  "prepublishOnly": "npm run build",
   "repository": {
     "type": "git",
     "url": "https://github.com/lordfpx/AB-mediaQuery.git"
@@ -27,7 +28,7 @@
   },
   "homepage": "https://github.com/lordfpx/AB-mediaQuery#readme",
   "dependencies": {
-    "another-brick": "^1.2.0"
+    "another-brick": "lordfpx/AB#dev"
   },
   "devDependencies": {
     "webpack": "^3.3.0"

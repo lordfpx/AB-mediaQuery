@@ -1,40 +1,37 @@
-# AB-mediaQuery
+# **AB-mediaQuery**
 
-AB-mediaQuery is the JavaScript side of Media Queries. It's very simple, yet convenient tool for your developments.
+**AB-mediaQuery** is the JavaScript side of Media Queries. It's a very simple, yet convenient tool for your developments.
 
-This is small, dependencie free and vanilla JavaScript. Version 1 is used in the French website of [ENGIE](https://particuliers.engie.fr).
+This dependencie free and vanilla script is damn small: **less than 1KB** (uglyfied and GZipped)!
 
-It's damn small: **less than 900 bytes** (uglyfied and GZipped)!
+Have a look at this [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010).
 
-Have a look at the [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010).
+Version 1 is used on French websites of [ENGIE](https://particuliers.engie.fr) and [Gaz tarif règlementé](https://gaz-tarif-reglemente.fr/).
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability)](https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability)
 
-## Install
+---
 
-Install with npm:
+## **Install**
+
 ```bash
 npm install --save ab-mediaquery
 ````
 
-Because of the usage of `matchMedia` and `requestAnimationFrame`, compatibility start from IE 10. To rise compatibility up to IE 9, you can add [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) and [requestAnimationFrame polyfill](https://gist.github.com/paulirish/1579671).
+---
 
+## **Setup**
 
-## Setup
-
-### Install
-Just import it in your JS bundle (webpack, ES6, browserify...):
+Import in your JS bundle (webpack, ES6, browserify...):
 ```js
 import abMediaQuery from 'ab-mediaquery';
 ```
 
-Or loading the js right before `</body>` if you are not using a builder.
+(If you are not building your assets, simply load the script `AB-mediaQuery.min.js` in the `dist` folder.)
 
-
-### Init
-
+Init the script with:
 ```js
-abMediaQuery({
+AB.plugins.mediaQuery({
   bp: {
     smallOnly:  'screen and (max-width: 767px)',
     mediumOnly: 'screen and (min-width: 768px) and (max-width: 1024px)',
@@ -48,7 +45,7 @@ abMediaQuery({
 Other example:
 
 ```js
-abMediaQuery({
+AB.plugins.mediaQuery({
   bp: {
     tiny: "screen and (max-width: 575px)",
     small: "screen and (min-width: 576px)",
@@ -59,7 +56,9 @@ abMediaQuery({
 });
 ```
 
-## Usage
+---
+
+## **Usage**
 
 - Get current breakpoints
   ```js

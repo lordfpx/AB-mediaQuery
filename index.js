@@ -1,21 +1,18 @@
 'use strict';
 
-var AB = require('another-brick');
+window.AB = require('another-brick');
 
-window.abMediaQuery = function(opt) {
+var mediaQuery = function(opt) {
   window.AB.mediaQuery = (function() {
-    var _settings = opt || {bp: {}},
-        _animated = false;
+    var _settings = opt || {bp: {}};
 
     var _getCurrent = function() {
       var sizes = [];
 
       for (var key in _settings.bp) {
-        if (!_settings.bp.hasOwnProperty(key))
-          continue;
-
-        if (window.matchMedia(_settings.bp[key]).matches)
+        if (_settings.bp.hasOwnProperty(key) && window.matchMedia(_settings.bp[key]).matches) {
           sizes.push(key);
+        }
       }
 
       return sizes;
@@ -29,8 +26,6 @@ window.abMediaQuery = function(opt) {
         _currentStore = newSize;
         window.dispatchEvent(new CustomEvent('changed.ab-mediaquery'));
       }
-
-      _animated = false;
     };
 
     var is = function(size) {
@@ -42,12 +37,7 @@ window.abMediaQuery = function(opt) {
     var _currentStore = _getCurrent()
 
     // change on resize
-    window.addEventListener('resize', function() {
-      if (!_animated) {
-        window.requestAnimationFrame(_updateSizes);
-        _animated = true;
-      }
-    });
+    window.addEventListener('ab-resize', _updateSizes);
 
     return {
       get current() { return _currentStore; },
@@ -55,3 +45,7 @@ window.abMediaQuery = function(opt) {
     };
   })();
 };
+
+
+window.AB.plugins.mediaQuery = mediaQuery;
+module.exports = window.AB;
