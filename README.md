@@ -1,4 +1,4 @@
-# **AB-mediaQuery**
+# AB-mediaQuery
 
 **AB-mediaQuery** is the JavaScript side of Media Queries. It's a very simple, yet convenient tool for your developments.
 
@@ -10,17 +10,15 @@ Version 1 is used on French websites of [ENGIE](https://particuliers.engie.fr) a
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability)](https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability)
 
----
 
-## **Install**
+## Install
 
 ```bash
 npm install --save ab-mediaquery
-````
+```
 
----
 
-## **Setup**
+## Setup
 
 Import in your JS bundle (webpack, ES6, browserify...):
 ```js
@@ -56,9 +54,8 @@ AB.plugins.mediaQuery({
 });
 ```
 
----
 
-## **Usage**
+## Usage
 
 - Get current breakpoints
   ```js
