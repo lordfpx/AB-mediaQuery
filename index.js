@@ -1,6 +1,7 @@
 'use strict';
 
-window.AB = require('another-brick');
+var anotherBrick = require('../AB/index.js'); // dev mode
+// var anotherBrick = require('another-brick');
 
 var mediaQuery = function(opt) {
   window.AB.mediaQuery = (function() {
@@ -48,4 +49,4 @@ var mediaQuery = function(opt) {
 
 
 window.AB.plugins.mediaQuery = mediaQuery;
-module.exports = window.AB;
+module.exports = mediaQuery;

@@ -1,12 +1,12 @@
 # AB-mediaQuery
 
-**AB-mediaQuery** is the JavaScript side of Media Queries. It's a very simple, yet convenient tool for your developments.
+**AB-mediaQuery** is the JavaScript side of Media queries. It's a very simple, yet very convenient tool for your developments.
 
-This dependencie free and vanilla script is damn small: **less than 1KB** (uglyfied and GZipped)!
+This vanilla script is damn small: **less than 1 KB** (uglyfied and GZipped)!
 
 Have a look at this [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010).
 
-Version 1 is used on French websites of [ENGIE](https://particuliers.engie.fr) and [Gaz tarif règlementé](https://gaz-tarif-reglemente.fr/).
+It's used on French websites of [ENGIE](https://particuliers.engie.fr) and [Gaz tarif règlementé](https://gaz-tarif-reglemente.fr/).
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability)](https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability)
 

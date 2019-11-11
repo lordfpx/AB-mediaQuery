@@ -31,6 +31,6 @@
     "another-brick": "lordfpx/AB#dev"
   },
   "devDependencies": {
-    "webpack": "^3.3.0"
+    "webpack": "^3.12.0"
   }
 }
