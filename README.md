@@ -2,9 +2,9 @@
 
 **AB-mediaQuery** is the JavaScript side of Media Queries. It's a very simple, yet convenient tool for your developments.
 
-This dependencie free and vanilla script is damn small: **less than 1KB** (uglyfied and GZipped)!
+This dependencie free and vanilla script is damn small: **less than 1.3KB** (uglyfied and GZipped)!
 
-Have a look at this [Codepen demonstration](https://codepen.io/lordfpx/pen/MeaWmV?editors=0010).
+Have a look at this [demonstration](http://lordfpx.github.io/AB-mediaQuery/) (offline version in the `docs` folder).
 
 Version 1 is used on French websites of [ENGIE](https://particuliers.engie.fr) and [Gaz tarif règlementé](https://gaz-tarif-reglemente.fr/).
 
@@ -25,7 +25,7 @@ Import in your JS bundle (webpack, ES6, browserify...):
 import abMediaQuery from 'ab-mediaquery';
 ```
 
-(If you are not building your assets, simply load the script `AB-mediaQuery.min.js` in the `dist` folder.)
+Built version are also available in the `dist` folder if your are not using a bundler.
 
 Init the script with:
 ```js
