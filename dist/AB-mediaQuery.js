@@ -117,16 +117,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"HLFU":[function(require,module,exports) {
+})({"cnAZ":[function(require,module,exports) {
 // polyfill customEvent pour IE
 ;(function() {
-  if ( typeof window.CustomEvent === "function" ) return false;
+  if (typeof window.CustomEvent === "function") return false;
   function CustomEvent ( event, params ) {
     params = params || { bubbles: false, cancelable: false, detail: undefined };
-    var evt = document.createEvent( 'CustomEvent' );
-    evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+    var evt = document.createEvent('CustomEvent');
+    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
     return evt;
-   }
+  }
   CustomEvent.prototype = window.Event.prototype;
   window.CustomEvent = CustomEvent;
 })();
@@ -268,4 +268,4 @@ var mediaQuery = function mediaQuery(opt) {
 
 window.AB.plugins.mediaQuery = mediaQuery;
 module.exports = window.AB;
-},{"another-brick":"HLFU"}]},{},["Focm"], null)
+},{"another-brick":"cnAZ"}]},{},["Focm"], null)
