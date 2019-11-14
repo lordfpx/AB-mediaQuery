@@ -69,3 +69,6 @@ $RECYCLE.BIN/
 node_modules/
 
 .vscode/
+
+# parceljs cache
+.cache

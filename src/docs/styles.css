@@ -1,0 +1,5 @@
+@import "../../node_modules/tachyons";
+
+main {
+  flex: 0 1 100%;
+}
