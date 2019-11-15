@@ -6,9 +6,9 @@ This dependencie free and vanilla script is damn small: **less than 1.3KB** (ugl
 
 Have a look at this [demonstration](http://lordfpx.github.io/AB-mediaQuery/) (offline version in the `docs` folder).
 
-Version 1 is used on French websites of [ENGIE](https://particuliers.engie.fr) and [Gaz tarif règlementé](https://gaz-tarif-reglemente.fr/).
+It's used in [AB-interchange](https://github.com/lordfpx/AB-interchange).
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/0d5481a675183a5d3c01/maintainability)](https://codeclimate.com/github/lordfpx/AB-mediaQuery/maintainability)
+Version 1 is used on French websites of [ENGIE](https://particuliers.engie.fr) and [Gaz tarif règlementé](https://gaz-tarif-reglemente.fr/).
 
 
 ## Install
@@ -25,9 +25,10 @@ Import in your JS bundle (webpack, ES6, browserify...):
 import abMediaQuery from 'ab-mediaquery';
 ```
 
-Built version are also available in the `dist` folder if your are not using a bundler.
+If you need a built version, it's in the `dist` folder.
 
 Init the script with:
+
 ```js
 AB.plugins.mediaQuery({
   bp: {
@@ -66,7 +67,7 @@ AB.plugins.mediaQuery({
 - Check specific breakpoint case
   ```js
   AB.mediaQuery.is('mediumOnly');
-  // will return true or false
+  // return a boolean
   ```
 
 - JavaScript event

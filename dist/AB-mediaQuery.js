@@ -225,7 +225,7 @@ var mediaQuery = function mediaQuery(opt) {
       bp: {}
     };
 
-    var _getCurrent = function _getCurrent() {
+    function _getCurrent() {
       var sizes = [];
 
       for (var key in _settings.bp) {
@@ -235,9 +235,9 @@ var mediaQuery = function mediaQuery(opt) {
       }
 
       return sizes;
-    };
+    }
 
-    var _updateSizes = function _updateSizes() {
+    function _updateSizes() {
       var newSize = _getCurrent(); // check if it's updated
 
 
@@ -245,11 +245,11 @@ var mediaQuery = function mediaQuery(opt) {
         _currentStore = newSize;
         window.dispatchEvent(new CustomEvent('changed.ab-mediaquery'));
       }
-    };
+    }
 
-    var is = function is(size) {
-      if (_settings.bp[size]) return window.matchMedia(_settings.bp[size]).matches;
-    }; // get current breakpoints
+    function is(size) {
+      return _settings.bp[size] ? window.matchMedia(_settings.bp[size]).matches : false;
+    } // get current breakpoints
 
 
     var _currentStore = _getCurrent(); // change on resize
