@@ -6,7 +6,7 @@ var mediaQuery = function(opt) {
   window.AB.mediaQuery = (function() {
     var _settings = opt || {bp: {}};
 
-    var _getCurrent = function() {
+    function _getCurrent() {
       var sizes = [];
 
       for (var key in _settings.bp) {
@@ -16,9 +16,9 @@ var mediaQuery = function(opt) {
       }
 
       return sizes;
-    };
+    }
 
-    var _updateSizes = function() {
+    function _updateSizes() {
       var newSize = _getCurrent();
 
       // check if it's updated
@@ -26,12 +26,11 @@ var mediaQuery = function(opt) {
         _currentStore = newSize;
         window.dispatchEvent(new CustomEvent('changed.ab-mediaquery'));
       }
-    };
+    }
 
-    var is = function(size) {
-      if (_settings.bp[size])
-        return window.matchMedia(_settings.bp[size]).matches;
-    };
+    function is(size) {
+      return _settings.bp[size] ? window.matchMedia(_settings.bp[size]).matches : false;
+    }
 
     // get current breakpoints
     var _currentStore = _getCurrent()
