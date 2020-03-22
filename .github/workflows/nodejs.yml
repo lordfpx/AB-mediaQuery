@@ -15,11 +15,11 @@ jobs:
         with:
           node-version: 10
       - name: Install dependencies
-      - run: npm install
+        run: npm install
       - name: Build
-      - run: npm run build
+        run: npm run build
       - name: Test build
-      - run: npm test
+        run: npm test
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
