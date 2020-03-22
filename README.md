@@ -2,9 +2,9 @@
 
 **AB-mediaQuery** is the JavaScript side of Media Queries. It's a very simple, yet convenient tool for your developments.
 
-This dependencie free and vanilla script is damn small: **less than 1.3KB** (uglyfied and GZipped)!
+**Have a look at this [Demonstration page](http://lordfpx.github.io/AB-mediaQuery/) (offline version is in the `docs` folder).**
 
-Have a look at this [demonstration](http://lordfpx.github.io/AB-mediaQuery/) (offline version in the `docs` folder).
+This dependencie free and vanilla script is damn small: **less than 1.3KB** (uglyfied and GZipped)!
 
 It's used in [AB-interchange](https://github.com/lordfpx/AB-interchange).
 
